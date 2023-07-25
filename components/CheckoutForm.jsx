@@ -17,13 +17,21 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const onConfirm = async () => {
+    const clientSecret = new URLSearchParams(window.location.search).get(
+        "payment_intent_client_secret"
+      );
+  
+      if (!clientSecret) {
+        return;
+      }
+
     const {error} = await stripe.confirmPayment({
       // `Elements` instance that's used to create the Express Checkout Element.
       elements,
       // `clientSecret` from the created PaymentIntent
       clientSecret,
       confirmParams: {
-        return_url: 'https://localhost:3000',
+        return_url: 'https://nextjselementsintegration.vercel.app/',
       },
       // Uncomment below if you only want redirect for redirect-based payments.
       // redirect: 'if_required',
