@@ -37,7 +37,6 @@ export default function App() {
     appearance,
     currency, 
     amount,
-    clientSecret
   };
 
   return (
