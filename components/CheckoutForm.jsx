@@ -3,6 +3,7 @@ import {
   PaymentElement,
   LinkAuthenticationElement,
   AddressElement,
+  ExpressCheckoutElement,
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
@@ -95,6 +96,7 @@ export default function CheckoutForm() {
             setEmail(e.value.email)}
         }
       />
+      <ExpressCheckoutElement id="express-checkout-element" />
       <AddressElement id="address-element" options={addressElementOptions} />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
