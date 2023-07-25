@@ -2,6 +2,7 @@ import React from "react";
 import {
   PaymentElement,
   LinkAuthenticationElement,
+  AddressElement,
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
@@ -82,15 +83,19 @@ export default function CheckoutForm() {
     layout: "tabs",
   };
 
+  const addressElementOptions = {
+    mode: 'billing',
+  }
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => {
-            console.log(e);
             setEmail(e.value.email)}
         }
       />
+      <AddressElement id="address-element" options={addressElementOptions} />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
