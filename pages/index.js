@@ -11,6 +11,8 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function App() {
   const [clientSecret, setClientSecret] = React.useState("");
+  const [amount, setAmount] = React.useState(0);
+  const [currency, setCurrency] = React.useState("");
 
   React.useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -20,15 +22,21 @@ export default function App() {
       body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
     })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => {
+        setAmount(data.amount);
+        setCurrency(data.currency);
+        setClientSecret(data.clientSecret)}
+        );
   }, []);
 
   const appearance = {
     theme: 'stripe',
   };
   const options = {
-    clientSecret,
+    mode: 'payment',
     appearance,
+    currency, 
+    amount,
   };
 
   return (
