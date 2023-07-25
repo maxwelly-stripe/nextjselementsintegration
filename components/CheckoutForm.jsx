@@ -56,6 +56,7 @@ export default function CheckoutForm() {
         onConfirm={onConfirm}
         options={options}
       />
+      <PaymentElement />
     </div>
   );
 }
