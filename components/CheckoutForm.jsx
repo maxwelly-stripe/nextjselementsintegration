@@ -44,10 +44,17 @@ export default function CheckoutForm() {
     }
   };
 
+  const options = {
+    wallets: {
+        googlePay: 'always'
+    }
+  }
+
   return (
     <div id="checkout-page">
       <ExpressCheckoutElement
         onConfirm={onConfirm}
+        options={options}
       />
     </div>
   );
