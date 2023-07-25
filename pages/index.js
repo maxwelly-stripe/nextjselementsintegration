@@ -11,7 +11,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function App() {
   const [clientSecret, setClientSecret] = React.useState("");
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState(1000);
   const [currency, setCurrency] = React.useState("cad");
 
   React.useEffect(() => {
