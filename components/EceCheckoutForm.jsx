@@ -89,6 +89,8 @@ export default function EceCheckoutForm() {
   const eceOptions = {
     wallets: {
         googlePay: 'always',
+        link: 'always',
+        applePay: 'always',
     }
   }
 
