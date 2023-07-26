@@ -34,7 +34,6 @@ export default function Navigation() {
             <MenuItem value="/paymentelement">Payment Element</MenuItem>
             <MenuItem value="/deferredintent">Deferred Intent</MenuItem>
             <MenuItem value="/ece">Express Checkout Element</MenuItem>
-            <MenuItem value="/ecepe">Express Checkout Element + Payment Element</MenuItem>
           </Select>
       </FormControl>
     </>
