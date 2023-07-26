@@ -17,7 +17,7 @@ export default function ExpressCheckoutElementPage() {
     const options = {
         mode: 'payment',
         appearance,
-        currency: 'cad', 
+        currency: 'usd', 
         amount: 1000,
     };
 
