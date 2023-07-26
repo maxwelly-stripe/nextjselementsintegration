@@ -1,15 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
-  PaymentElement,
-  LinkAuthenticationElement,
-  AddressElement,
-  ExpressCheckoutElement,
-  useStripe,
-  useElements
-} from "@stripe/react-stripe-js";
-import '../pages/globals.css'
+    ExpressCheckoutElement,
+    useStripe,
+    useElements
+  } from "@stripe/react-stripe-js";
+  import '../pages/globals.css'
 
-export default function CheckoutForm() {
+export default function EceCheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -59,11 +56,19 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
+    const clientSecret = new URLSearchParams(window.location.search).get(
+        "payment_intent_client_secret"
+      );
+  
+      if (!clientSecret) {
+        return;
+      }
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/success",
+        return_url: "http://localhost:3000",
       },
     });
 
@@ -81,24 +86,15 @@ export default function CheckoutForm() {
     setIsLoading(false);
   };
 
-  const paymentElementOptions = {
-    layout: "tabs",
-  };
-
-  const addressElementOptions = {
-    mode: 'billing',
+  const eceOptions = {
+    wallet: {
+        googlePay: 'always',
+    }
   }
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <LinkAuthenticationElement
-        id="link-authentication-element"
-        onChange={(e) => {
-            setEmail(e.value.email)}
-        }
-      />
-      <AddressElement id="address-element" options={addressElementOptions} />
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+      <ExpressCheckoutElement options={eceOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
