@@ -87,7 +87,7 @@ export default function EceCheckoutForm() {
   };
 
   const eceOptions = {
-    wallet: {
+    wallets: {
         googlePay: 'always',
     }
   }
